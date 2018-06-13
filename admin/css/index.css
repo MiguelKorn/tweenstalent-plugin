@@ -1,0 +1,68 @@
+.table-icon {
+    text-align: center;
+}
+
+.row-top {
+    margin-top: 10px;
+}
+
+.submit {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.multiselect-container {
+    width: 100% !important;
+}
+
+span.badge {
+    margin-right: 5px;
+}
+
+/* Beeldtalent */
+.blueyPurple {
+    background-color: #6932a5;
+    border-color: #6932a5;
+}
+
+/* Taaltalent*/
+.brightBlue {
+    background-color: #0076ff;
+    border-color: #0076ff;
+}
+
+/* Zelftalent */
+.brightSkyBlue {
+    background-color: #00b9f1;
+    border-color: #00b9f1;
+}
+
+/* Natuurtalent */
+.seaweed {
+    background-color: #1ede81;
+    border-color: #1ede81;
+}
+
+/* Muziektalent */
+.pinkishRed {
+    background-color: #f00d4c;
+    border-color: #f00d4c;
+}
+
+/* Rekentalent */
+.pumpkinOrange {
+    background-color: #ff7500;
+    border-color: #ff7500;
+}
+
+/* Beweegtalent */
+.goldenYellow {
+    background-color: #ffc515;
+    border-color: #ffc515;
+}
+
+/* Menstalent */
+.violetPink {
+    background-color: #ff66fc;
+    border-color: #ff66fc;
+}
