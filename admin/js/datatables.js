@@ -4,6 +4,7 @@ jQuery(document).ready(function () {
         var schoolList = jQuery("#schoolList");
         var levelList = jQuery("#levelList");
 
+        // Add guest datatable if guestList exists
         if (guestList.length) {
             guestList.DataTable({
                 dom: '<"row"<"col-sm-12"><"col-sm-12 legend">>" + "<"row"<"col-sm-12"tr>>" + "<"row"<"col-sm-5"B><"col-sm-7"p>>',
@@ -34,6 +35,7 @@ jQuery(document).ready(function () {
                     }
                 ],
                 initComplete: function () {
+                    // get count of presence
                     var presenceColumn = this.api().column(1).data();
                     var invitedData = this.api().column(7).data();
                     var countPresence = {
@@ -64,6 +66,7 @@ jQuery(document).ready(function () {
             });
         }
 
+        // Add question datatable if questionList exists
         if (questionList.length) {
             var currentTalent = 'Beeldtalent';
             var table = questionList.DataTable({
@@ -80,10 +83,12 @@ jQuery(document).ready(function () {
                     {width: "20%", targets: 0}
                 ],
                 initComplete: function () {
+                    // set initial seach for column talent
                     this.api().column(0).search(currentTalent).draw();
 
                     var legend = jQuery('div.legend');
 
+                    // onclick handler for seach function
                     legend.find('button').on('click', function (e) {
                         var target = jQuery(e.target);
                         var text = target.text();
@@ -97,9 +102,11 @@ jQuery(document).ready(function () {
                         jQuery('#submit-talent').val(text + ' Opslaan');
                     });
 
+                    // change search
                     legend.find('button:not(:contains(' + currentTalent + '))').removeClass('active');
                     legend.find('button:contains(' + currentTalent + ')').addClass('active');
 
+                    // add save current talent
                     jQuery('div.submit').html(
                         '<div class="row">' +
                         '<div class="col-4">' +
@@ -112,6 +119,7 @@ jQuery(document).ready(function () {
             });
         }
 
+        // Add school datatable if schoolList exists
         if (schoolList.length) {
             schoolList.DataTable({
                 dom: '<"row"<"col-sm-6 add"><"col-sm-6"f>>" + "<"row"<"col-sm-12"tr>>" + "<"row"<"col-sm-4"><"col-sm-8"p>>',
@@ -127,6 +135,7 @@ jQuery(document).ready(function () {
                     {visible: false}
                 ],
                 initComplete: function () {
+                    // add addSchool button
                     jQuery('div.add').html(
                         '<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addSchoolModal" onclick="event.preventDefault()">School Toevoegen</button>'
                     )
@@ -134,6 +143,7 @@ jQuery(document).ready(function () {
             });
         }
 
+        // Add level datatable if levelList exists
         if (levelList.length) {
             levelList.DataTable({
                 dom: '<"row"<"col-sm-6 add"><"col-sm-6">>" + "<"row"<"col-sm-12"tr>>" + "<"row"<"col-sm-4"><"col-sm-8"p>>',
@@ -148,6 +158,7 @@ jQuery(document).ready(function () {
                     {orderable: false, width: "10%"}
                 ],
                 initComplete: function () {
+                    // add addLevel button
                     jQuery('div.add').html(
                         '<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addLevelModal" onclick="event.preventDefault()">Niveau Toevoegen</button>'
                     )

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Main event page content
+ */
 function tt_event_page()
 {
     $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'event';
@@ -51,6 +54,11 @@ function tt_event_page()
     <?php
 }
 
+/**
+ * Event content
+ *
+ * @return bool
+ */
 function eventContent()
 {
     $api = new ExternalApi();
@@ -165,10 +173,25 @@ function eventContent()
     return false;
 }
 
+/**
+ * Guests Content
+ *
+ * @param $guests
+ *
+ * @return bool
+ */
 function guestsContent($guests)
 {
+    global $api;
     if ( isset( $_POST['submit-delete'] ) ) {
-
+        $result = $api->deleteGuest($_POST['submit-delete']);
+        if ( isset( $result ) ) {
+            if ( ! $result ) {
+                TweensTalent::notice( 'error', '<p>Er is iets misgegaan. Probeer opnieuw!</p>', true );
+            } else {
+                TweensTalent::notice( 'success', '<p>Successvol verwijderd!</p>', true );
+            }
+        }
     }
     ?>
     <form method="post" action="<?= esc_url( $_SERVER['REQUEST_URI'] ) ?>" novalidate="novalidate" id="form">
@@ -243,6 +266,11 @@ function guestsContent($guests)
     return false;
 }
 
+/**
+ * Add guest Content
+ *
+ * @return bool
+ */
 function newGuestContent()
 {
     $guest = false;
@@ -336,6 +364,9 @@ function newGuestContent()
     return false;
 }
 
+/**
+ * Register Email Content
+ */
 function registerEmailContent()
 {
     ?>

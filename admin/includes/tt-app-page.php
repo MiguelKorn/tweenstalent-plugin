@@ -1,5 +1,9 @@
 <?php
 $api = new ExternalApi();
+
+/**
+ * Main app page function
+ */
 function tt_app_page()
 {
     $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'questions';
@@ -37,6 +41,11 @@ function tt_app_page()
     <?php
 }
 
+/**
+ * Question Content
+ *
+ * @return bool
+ */
 function questionContent()
 {
     global $api;
@@ -98,6 +107,11 @@ function questionContent()
     return false;
 }
 
+/**
+ * Schools Content
+ *
+ * @return bool
+ */
 function schoolsContent()
 {
     global $api;
@@ -185,6 +199,11 @@ function schoolsContent()
     return false;
 }
 
+/**
+ * Levels Content
+ *
+ * @return bool
+ */
 function levelsContent()
 {
     global $api;

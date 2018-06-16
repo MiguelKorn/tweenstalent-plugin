@@ -1,7 +1,9 @@
 jQuery(document).ready(function () {
+    // set datetimepicker settings
     jQuery.datetimepicker.setLocale('nl');
     jQuery.datetimepicker.setDateFormatter('moment');
 
+    // get documents
     var startDate = jQuery('#eventstart');
     var startDateHidden = jQuery('#eventstarthidden');
 
@@ -24,6 +26,7 @@ jQuery(document).ready(function () {
         }
     };
 
+    // run function on elements
     startDate.datetimepicker(settings(startDateHidden));
     endDate.datetimepicker(settings(endDateHidden));
 });

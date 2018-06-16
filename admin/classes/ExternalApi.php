@@ -5,6 +5,9 @@ class ExternalApi
     private $key;
     private $apiUrl = API_URL;
 
+    /**
+     * ExternalApi constructor.
+     */
     public function __construct()
     {
 
@@ -21,6 +24,9 @@ class ExternalApi
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getKey()
     {
         $request = array(
@@ -47,6 +53,11 @@ class ExternalApi
         return $response['access_token'];
     }
 
+    /**
+     * @param $url
+     *
+     * @return mixed
+     */
     private function getTrait($url)
     {
         $args = array(
@@ -61,11 +72,26 @@ class ExternalApi
         return $response['data'];
     }
 
+    /**
+     * @return mixed
+     */
     public function getEvent()
     {
         return $this->getTrait( '/events' )[0];
     }
 
+    /**
+     * @param $id
+     * @param $name
+     * @param $streetName
+     * @param $streetNumber
+     * @param $postalCode
+     * @param $city
+     * @param $startDate
+     * @param $endDate
+     *
+     * @return array|mixed|object
+     */
     public function patchEvent($id, $name, $streetName, $streetNumber, $postalCode, $city, $startDate, $endDate)
     {
         $request = array(
@@ -94,11 +120,25 @@ class ExternalApi
         return json_decode( $response['body'], true );
     }
 
+    /**
+     * @return mixed
+     */
     public function getGuests()
     {
         return $this->getTrait( '/guests' );
     }
 
+    /**
+     * @param $firstName
+     * @param $lastNamePrefix
+     * @param $lastName
+     * @param $email
+     * @param $company
+     * @param $job
+     * @param bool $register
+     *
+     * @return bool
+     */
     public function addGuest($firstName, $lastNamePrefix, $lastName, $email, $company, $job, $register = false)
     {
         $request = array(
@@ -153,6 +193,11 @@ class ExternalApi
         }
     }
 
+    /**
+     * @param $id
+     *
+     * @return bool
+     */
     public function deleteGuest($id)
     {
         $args = array(
@@ -168,11 +213,19 @@ class ExternalApi
         return $response['response']['code'] === 200;
     }
 
+    /**
+     * @return mixed
+     */
     public function getQuestions()
     {
         return $this->getTrait( '/questions?include=talent' );
     }
 
+    /**
+     * @param $questions
+     *
+     * @return array|bool
+     */
     public function patchQuestions($questions)
     {
         $errors   = array();
@@ -207,16 +260,27 @@ class ExternalApi
         return ( ! empty( $errors ) ) ? $errors : true;
     }
 
+    /**
+     * @return mixed
+     */
     public function getTalents()
     {
         return $this->getTrait( '/talents' );
     }
 
+    /**
+     * @return mixed
+     */
     public function getSchools()
     {
         return $this->getTrait( '/schools?include=schoolLevels' );
     }
 
+    /**
+     * @param $name
+     *
+     * @return bool
+     */
     public function addSchool($name)
     {
         $request = array(
@@ -237,6 +301,12 @@ class ExternalApi
         return $response['response']['code'] === 200;
     }
 
+    /**
+     * @param $id
+     * @param $name
+     *
+     * @return bool
+     */
     public function patchSchool($id, $name)
     {
         $request = array(
@@ -257,6 +327,11 @@ class ExternalApi
         return $response['response']['code'] === 200;
     }
 
+    /**
+     * @param $id
+     *
+     * @return bool
+     */
     public function deleteSchool($id)
     {
         $args = array(
@@ -272,11 +347,19 @@ class ExternalApi
         return $response['response']['code'] === 200;
     }
 
+    /**
+     * @return mixed
+     */
     public function getLevels()
     {
         return $this->getTrait( '/schools/levels' );
     }
 
+    /**
+     * @param $name
+     *
+     * @return bool
+     */
     public function addLevel($name)
     {
         $request = array(
@@ -297,6 +380,12 @@ class ExternalApi
         return $response['response']['code'] === 200;
     }
 
+    /**
+     * @param $id
+     * @param $name
+     *
+     * @return bool
+     */
     public function patchLevel($id, $name)
     {
         $request = array(
@@ -317,6 +406,11 @@ class ExternalApi
         return $response['response']['code'] === 200;
     }
 
+    /**
+     * @param $id
+     *
+     * @return bool
+     */
     public function deleteLevel($id)
     {
         $args = array(

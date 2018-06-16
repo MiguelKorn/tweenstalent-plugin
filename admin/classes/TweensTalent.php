@@ -10,6 +10,9 @@ class TweensTalent
 {
     private $api;
 
+    /**
+     * TweensTalent constructor.
+     */
     public function __construct()
     {
         $this->api = new ExternalApi();
@@ -24,6 +27,9 @@ class TweensTalent
         add_action( 'tt-hook', array( $this, 'hookFunction' ) );
     }
 
+    /**
+     * add admin menu
+     */
     public function add_admin_menu()
     {
         /**
@@ -67,12 +73,12 @@ class TweensTalent
         );
     }
 
+    /**
+     * @param $hook
+     */
     public function load_scripts($hook)
     {
         if ( $hook === 'toplevel_page_tt-events' || 'toplevel_page_tt-app' || 'toplevel_page_tt-stats' ) {
-            wp_enqueue_media();
-            wp_enqueue_script( 'wp-color-picker' );
-
             // moment plugin
             wp_register_script( 'moment-script', plugins_url( '../libraries/MomentJs/moment-with-locales.min.js', __FILE__ ), array( 'jquery' ), null, true );
             wp_enqueue_script( 'moment-script' );
@@ -89,15 +95,6 @@ class TweensTalent
             wp_register_script( 'dt-custom', plugins_url( '../js/datatables.js', __FILE__ ), array( 'jquery' ), null, true );
             wp_enqueue_script( 'dt-custom' );
 
-            // BootstrapMultiSelect plugin
-            wp_register_script( 'bms', plugins_url( '../libraries/BootstrapMultiSelect/js/bootstrap-multiselect.js', __FILE__ ), array( 'jquery' ), null, true );
-            wp_enqueue_script( 'bms' );
-
-            // Multiselect custom
-            wp_register_script( 'bms-custom', plugins_url( '../js/multiselect.js', __FILE__ ), array( 'jquery' ), null, true );
-            wp_enqueue_script( 'bms-custom' );
-
-
             // datetime picker plugin
             wp_register_script( 'dtp-script', plugins_url( '../libraries/DatetimePicker/jquery.datetimepicker.full.min.js', __FILE__ ), array( 'jquery' ), null, true );
             wp_enqueue_script( 'dtp-script' );
@@ -106,20 +103,15 @@ class TweensTalent
             wp_register_script( 'dtp-custom', plugins_url( '../js/datetime.js', __FILE__ ), array( 'jquery' ), null, true );
             wp_enqueue_script( 'dtp-custom' );
 
-            // custom script for address validation
-            wp_register_script( 'av', plugins_url( '../js/addressValidation.js', __FILE__ ), array( 'jquery' ), null, true );
-            wp_enqueue_script( 'av' );
-
             // FontAwesome svg with js
             wp_register_script( 'fa', plugins_url( '../libraries/FontAwesome/js/fontawesome-all.min.js', __FILE__ ), array(), null, true );
             wp_enqueue_script( 'fa' );
-
-            // custom wp scripts
-            wp_register_script( 'wpc', plugins_url( '../js/wp.custom.js', __FILE__ ), array( 'jquery' ), null, true );
-            wp_enqueue_script( 'wpc' );
         }
     }
 
+    /**
+     * @param $hook
+     */
     function load_styles($hook)
     {
         if ( $hook === 'toplevel_page_tt-events' || 'toplevel_page_tt-app' || 'toplevel_page_tt-stats' ) {
@@ -131,16 +123,9 @@ class TweensTalent
             wp_register_style( 'datatables', plugins_url( '../libraries/DataTables/datatables.css', __FILE__ ) );
             wp_enqueue_style( 'datatables' );
 
-            // BootstrapMultiSelect
-            wp_register_style( 'bms', plugins_url( '../libraries/BootstrapMultiSelect/css/bootstrap-multiselect.css', __FILE__ ) );
-            wp_enqueue_style( 'bms' );
-
             // FontAwesome
             wp_register_style( 'fs', plugins_url( '../libraries/FontAwesome/css/fa-svg-with-js.css', __FILE__ ) );
             wp_enqueue_style( 'fs' );
-
-            // ColorPicker styles
-            wp_enqueue_style( 'wp-color-picker' );
 
             // Custom Styling
             wp_register_style( 'custom-style', plugins_url( '../css/index.css', __FILE__ ) );
@@ -148,6 +133,11 @@ class TweensTalent
         }
     }
 
+    /**
+     * @param $type
+     * @param $text
+     * @param $dismissible
+     */
     static function notice($type, $text, $dismissible)
     {
         ?>
@@ -157,60 +147,31 @@ class TweensTalent
         <?php
     }
 
+    /**
+     * @param $template
+     *
+     * @return string
+     */
     function custom_mailtpl_template($template)
     {
         return PLUGIN_URL . "templates/default.php";
     }
 
+    /**
+     * create settings
+     */
     function create_settings()
     {
         register_setting( 'tt-register-email-message', 'register_email_message' );
     }
 
+    /**
+     * @param $att
+     *
+     * @return string
+     */
     function contact_form($att)
     {
-//    return <<<EOT
-//<div role="form" class="wpcf7" id="wpcf7-f53-o1" lang="nl-NL" dir="ltr">
-//    <form action="#" method="post" class="wpcf7-form invalid">
-//        <p>
-//            <label> Je naam (verplicht)<br>
-//                <span class="wpcf7-form-control-wrap your-name">
-//                    <input required type="text" name="your-name" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required wpcf7-not-valid" aria-required="true" aria-invalid="true" >
-//                    <span role="alert" class="wpcf7-not-valid-tip">Het veld is verplicht.</span>
-//                </span>
-//            </label>
-//        </p>
-//        <p>
-//            <label> Je e-mail (verplicht)<br>
-//                <span class="wpcf7-form-control-wrap your-email">
-//                    <input required type="email" name="your-email" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email wpcf7-not-valid" aria-required="true" aria-invalid="true">
-//                    <span role="alert" class="wpcf7-not-valid-tip">Het veld is verplicht.</span>
-//                </span>
-//            </label>
-//        </p>
-//        <p>
-//            <label> Onderwerp (verplicht)<br>
-//                <span class="wpcf7-form-control-wrap your-subject">
-//                    <input required type="text" name="your-subject" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false">
-//                </span>
-//            </label>
-//        </p>
-//        <p>
-//            <label> Je bericht (verplicht)<br>
-//                <span class="wpcf7-form-control-wrap your-message">
-//                    <textarea required name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required wpcf7-not-valid" aria-required="true" aria-invalid="true" ></textarea>
-//                    <span role="alert" class="wpcf7-not-valid-tip">Het veld is verplicht.</span>
-//                </span>
-//            </label>
-//        </p>
-//        <p>
-//            <input type="submit" name="submit-contact" value="Verzenden" class="wpcf7-form-control wpcf7-submit">
-//        </p>
-//        <div class="wpcf7-response-output wpcf7-validation-errors" role="alert">Een of meer velden bevatten een fout. Graag corrigeren en opnieuw proberen.</div></form></div>
-//        <div class="wpcf7-response-output wpcf7-mail-sent-ok" role="alert">Bedankt voor je registratie.</div>
-//    </form>
-//</div>
-//EOT;
         $formMessage = '<div class="wpcf7-response-output wpcf7-display-none"></div>';
 
         if ( isset( $_POST['submit-contact'] ) ) {
@@ -258,6 +219,9 @@ EOT;
 
     }
 
+    /**
+     * @return string
+     */
     public function register_form()
     {
         $formMessage = '<div class="wpcf7-response-output wpcf7-display-none"></div>';
@@ -306,6 +270,9 @@ EOT;
 
     }
 
+    /**
+     * Hookfunction for to add ICS data to frontend
+     */
     function hookFunction() {
         if(isset($_GET['action']) && $_GET['action'] === 'add-to-agenda') {
             $event = $this->api->getEvent();

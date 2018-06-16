@@ -11,12 +11,21 @@ class Tabs
     private $page;
     private $tabNames;
 
+    /**
+     * Tabs constructor.
+     *
+     * @param $page
+     * @param $tabNames
+     */
     public function __construct($page, $tabNames)
     {
         $this->page = $page;
         $this->tabNames = $tabNames;
     }
 
+    /**
+     * @param $active
+     */
     public function displayNav($active)
     {
         foreach ( $this->tabNames as $key => $tab ) {

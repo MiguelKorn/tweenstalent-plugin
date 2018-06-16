@@ -24,7 +24,6 @@
  * along with {Plugin Name}. If not, see {URI to Plugin License}.
  */
 
-// debug TODO: remove debug from wp-config
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -46,14 +45,12 @@ require_once( 'admin/includes/mail/register.php' );
 // Require Classes
 require_once( 'admin/classes/TweensTalent.php' );
 require_once( 'admin/classes/ExternalApi.php' );
-require_once( 'admin/classes/EmailTemplate.php' );
 require_once( 'admin/classes/Tabs.php' );
 require_once( 'admin/classes/WP_Mail.php' );
 
 // Require Pages
 require_once( 'admin/includes/tt-app-page.php' );
 require_once( 'admin/includes/tt-event-page.php' );
-require_once( 'admin/includes/tt-event-email-page.php' );
 require_once( 'admin/includes/tt-statistics-page.php' );
 
 $tweensTalent = new TweensTalent();
