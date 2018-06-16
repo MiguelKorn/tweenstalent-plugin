@@ -53,7 +53,6 @@ jQuery(document).ready(function () {
                         countPresence.uitgenodigd += Number(user);
                     });
 
-
                     jQuery('div.legend').html(
                         '<div class="row">' +
                         '<div class="col"><button type="button" class="btn btn-success btn-sm btn-block">Aanwezig <span class="badge badge-light">' + countPresence.aanwezig + '</span></button></div>' +

@@ -57,9 +57,3 @@ require_once( 'admin/includes/tt-event-email-page.php' );
 require_once( 'admin/includes/tt-statistics-page.php' );
 
 $tweensTalent = new TweensTalent();
-
-
-
-
-
-

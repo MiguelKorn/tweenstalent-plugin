@@ -2,8 +2,6 @@
 
 function tt_event_email_page()
 {
-
-
     ?>
     <div class="wrap">
     <h1>WordPress Extra Post Info</h1>

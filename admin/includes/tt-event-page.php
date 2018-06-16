@@ -15,21 +15,21 @@ function tt_event_page()
     }
 
     $tabs = array(
-        'event'     => array(
+        'event'      => array(
             'name'    => 'Evenement',
             'content' => 'eventContent'
         ),
-        'guests'    => array(
+        'guests'     => array(
             'name'    => 'Gastenlijst',
             'content' => 'guestsContent'
         ),
-        'add-guest' => array(
+        'add-guest'  => array(
             'name'    => 'Gast Toevoegen',
             'content' => 'newGuestContent'
         ),
-        'edit-email'=>array(
-                'name'=>'Registratie Email',
-            'content'=>'registerEmailContent'
+        'edit-email' => array(
+            'name'    => 'Registratie Email',
+            'content' => 'registerEmailContent'
         )
     );
 
@@ -336,7 +336,8 @@ function newGuestContent()
     return false;
 }
 
-function registerEmailContent() {
+function registerEmailContent()
+{
     ?>
     <div class="wrap">
         <form method="post" action="options.php">
