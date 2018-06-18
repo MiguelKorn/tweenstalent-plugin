@@ -62,15 +62,15 @@ class TweensTalent
         /**
          * Statictics Menu
          */
-        add_menu_page(
-            'Statistieken',
-            'Statistieken',
-            'manage_options',
-            'tt-stats',
-            'tt_statistics_page',
-            'dashicons-chart-line',
-            3
-        );
+//        add_menu_page(
+//            'Statistieken',
+//            'Statistieken',
+//            'manage_options',
+//            'tt-stats',
+//            'tt_statistics_page',
+//            'dashicons-chart-line',
+//            3
+//        );
     }
 
     /**
