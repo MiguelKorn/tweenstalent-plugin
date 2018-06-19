@@ -295,7 +295,7 @@ function newGuestContent()
 
     ?>
     <h2 class="title">Gast toevoegen</h2>
-    <form method="post" action="<?= esc_url( $_SERVER['REQUEST_URI'] ) ?>" novalidate="novalidate" id="form">
+    <form method="post" action="<?= esc_url( $_SERVER['REQUEST_URI'] ) ?>" id="form">
         <?php settings_fields( 'media' ); ?>
         <table class="form-table">
             <tbody>
@@ -305,7 +305,7 @@ function newGuestContent()
                 </th>
                 <td>
                     <input name="guestFirstName" type="text" id="guestFirstName" class="regular-text"
-                           value="<?= $guest ? $firstName : '' ?>">
+                           value="<?= $guest ? $firstName : '' ?>" required>
                 </td>
             </tr>
             <tr>
@@ -314,7 +314,7 @@ function newGuestContent()
                 </th>
                 <td>
                     <input name="guestLastNamePrefix" type="text" id="guestLastNamePrefix" class="regular-text"
-                           value="<?= $guest ? $lastNamePrefix : '' ?>">
+                           value="<?= $guest ? $lastNamePrefix : '' ?>" required>
                 </td>
             </tr>
             <tr>
@@ -323,7 +323,7 @@ function newGuestContent()
                 </th>
                 <td>
                     <input name="guestLastName" type="text" id="guestLastName" class="regular-text"
-                           value="<?= $guest ? $lastName : '' ?>">
+                           value="<?= $guest ? $lastName : '' ?>" required>
                 </td>
             </tr>
             <tr>
@@ -331,8 +331,8 @@ function newGuestContent()
                     <label for="guestEmail">Email</label>
                 </th>
                 <td>
-                    <input name="guestEmail" type="text" id="guestEmail" class="regular-text"
-                           value="<?= $guest ? $email : '' ?>">
+                    <input name="guestEmail" type="email" id="guestEmail" class="regular-text"
+                           value="<?= $guest ? $email : '' ?>" required>
                 </td>
             </tr>
             <tr>
@@ -341,7 +341,7 @@ function newGuestContent()
                 </th>
                 <td>
                     <input name="guestCompany" type="text" id="guestCompany" class="regular-text"
-                           value="<?= $guest ? $company : '' ?>">
+                           value="<?= $guest ? $company : '' ?>" required>
                 </td>
             </tr>
             <tr>
@@ -350,7 +350,7 @@ function newGuestContent()
                 </th>
                 <td>
                     <input name="guestJob" type="text" id="guestJob" class="regular-text"
-                           value="<?= $guest ? $job : '' ?>">
+                           value="<?= $guest ? $job : '' ?>" required>
                 </td>
             </tr>
             </tbody>
@@ -359,8 +359,6 @@ function newGuestContent()
                                  value="Wijzigingen opslaan"></p>
     </form>
     <?php
-    echo file_get_contents( get_stylesheet_directory() . '/admin/templates/default.php' );
-
     return false;
 }
 

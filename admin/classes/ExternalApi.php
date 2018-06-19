@@ -168,18 +168,18 @@ class ExternalApi
 
         $response = $response = wp_remote_post( $this->apiUrl . '/guests', $args );
 
-        if ( $response['response']['code'] === 200) {
+        if ( $response['response']['code'] === 200 ) {
             $fullLastName = ! empty( $lastNamePrefix ) ? "{$lastNamePrefix} {$lastName}" : $lastName;
-            $url = get_home_url() . '/?action=add-to-agenda';
-            $search  = [ '{gebruiker}', '{voornaam}', '{achternaam}', '{email}', '{toevegen-aan-agenda}' ];
-            $replace = [
+            $url          = get_home_url() . '/?action=add-to-agenda';
+            $search       = [ '{gebruiker}', '{voornaam}', '{achternaam}', '{email}', '{toevegen-aan-agenda}' ];
+            $replace      = [
                 "{$firstName} {$fullLastName}",
                 $firstName,
                 $fullLastName,
                 $email,
                 "<a href='{$url}' target='_blank'>Toevoegen aan agenda</a>"
             ];
-            $message = str_replace( $search, $replace, get_option( 'register_email_message' ) );
+            $message      = str_replace( $search, $replace, get_option( 'register_email_message' ) );
 
             wp_mail(
                 "{$firstName} {$fullLastName} <{$email}>",
@@ -424,5 +424,49 @@ class ExternalApi
         $response = $response = wp_remote_post( $this->apiUrl . '/schools/levels/' . $id, $args );
 
         return $response['response']['code'] === 200;
+    }
+
+    public function getStudents()
+    {
+        return $this->getTrait( '/students?include=talents,school' );
+    }
+
+    public function parseStudentsData($students)
+    {
+        $studentsSchools = array();
+        $countGender     = array();
+        foreach ( $students as $student ) {
+            $schoolId = $student['school']['data']['id'];
+            $talents  = $student['talents']['data'];
+            if ( array_key_exists( $schoolId, $studentsSchools ) ) {
+                $studentsSchools[ $schoolId ]['students'] ++;
+            } else {
+                $studentsSchools[ $schoolId ] = array(
+                    'students' => 1,
+                    'talents'  => array()
+                );
+            }
+
+            foreach ( $talents as $talent ) {
+                $talentId = $talent['id'];
+                if ( array_key_exists( $talentId, $studentsSchools[ $schoolId ]['talents'] ) ) {
+                    $studentsSchools[ $schoolId ]['talents'][ $talentId ] ++;
+                } else {
+                    $studentsSchools[ $schoolId ]['talents'][ $talentId ] = 1;
+                }
+            }
+
+            $gender = $student['gender'];
+            if ( array_key_exists( $gender, $countGender ) ) {
+                $countGender[ $gender ] ++;
+            } else {
+                $countGender[ $gender ] = 1;
+            }
+        }
+
+        return array(
+            'studentSchools' => $studentsSchools,
+            'countGender'    => $countGender
+        );
     }
 }

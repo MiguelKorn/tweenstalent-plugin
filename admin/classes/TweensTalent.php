@@ -106,6 +106,10 @@ class TweensTalent
             // FontAwesome svg with js
             wp_register_script( 'fa', plugins_url( '../libraries/FontAwesome/js/fontawesome-all.min.js', __FILE__ ), array(), null, true );
             wp_enqueue_script( 'fa' );
+
+            // ChartJs
+            wp_register_script( 'chartjs', plugins_url( '../libraries/ChartJs/Chart.min.js', __FILE__ ), array(), null, false );
+            wp_enqueue_script( 'chartjs' );
         }
     }
 
@@ -120,7 +124,7 @@ class TweensTalent
             wp_enqueue_style( 'dtp-style' );
 
             // DataTables
-            wp_register_style( 'datatables', plugins_url( '../libraries/DataTables/datatables.css', __FILE__ ) );
+            wp_register_style( 'datatables', plugins_url( '../libraries/Datatables/datatables.css', __FILE__ ) );
             wp_enqueue_style( 'datatables' );
 
             // FontAwesome
